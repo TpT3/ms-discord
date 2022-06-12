@@ -30,6 +30,10 @@
 
         <p>Результат:</p>
         <textarea name="result" id="result" cols="50" rows="10"></textarea>
+        <br>
+
+        <button onclick="Copy()">Скопировать результат</button>
+        <p id="copy"></p>
     </div>
 
 
@@ -93,7 +97,6 @@
 
                     const e = game[y][x]
                     if (e != "x") {
-
                         switch (random(1, chanсe)) {
                             case 1:
                                 returnValue += `${emojies[e]}`;
@@ -118,11 +121,16 @@
 
         }
 
+        Copy = () => {
+            navigator.clipboard.writeText(element("result").value);
+            update("copy", "Готово!");
+        }
+
     </script>
 
     <style>
         body {
-            background-color: #373737;
+            background-color: #455476;
             font-family: Verdana, sans-serif;
         }
 
