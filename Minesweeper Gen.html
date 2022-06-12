@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Генератор Сапёра</title>
+</head>
+
+<body id='main'>
+    <script>function _0x45e3() { const _0x4ac665 = ['5336253FbpTkP', '229710GwMbqF', 'innerHTML', 'background', '2309852KnZEOz', 'floor', '8veGLfe', 'random', '83903MFLzwr', '1168517CvPCXH', '11159590bFTyTl', '3vSOZeN', 'main', 'style', '1048500rUIzAp', '12dhyGxC']; _0x45e3 = function () { return _0x4ac665; }; return _0x45e3(); } function _0x31dc(_0xd4e25f, _0x1314a3) { const _0x45e3df = _0x45e3(); return _0x31dc = function (_0x31dc64, _0x33c90c) { _0x31dc64 = _0x31dc64 - 0xaf; let _0x11d797 = _0x45e3df[_0x31dc64]; return _0x11d797; }, _0x31dc(_0xd4e25f, _0x1314a3); } const _0x14804f = _0x31dc; (function (_0x10dc0a, _0x660df9) { const _0x3f2cdb = _0x31dc, _0x601439 = _0x10dc0a(); while (!![]) { try { const _0x512978 = parseInt(_0x3f2cdb(0xb0)) / 0x1 * (parseInt(_0x3f2cdb(0xb7)) / 0x2) + parseInt(_0x3f2cdb(0xb3)) / 0x3 * (-parseInt(_0x3f2cdb(0xbc)) / 0x4) + -parseInt(_0x3f2cdb(0xb9)) / 0x5 + -parseInt(_0x3f2cdb(0xb6)) / 0x6 + -parseInt(_0x3f2cdb(0xb1)) / 0x7 * (-parseInt(_0x3f2cdb(0xbe)) / 0x8) + -parseInt(_0x3f2cdb(0xb8)) / 0x9 + parseInt(_0x3f2cdb(0xb2)) / 0xa; if (_0x512978 === _0x660df9) break; else _0x601439['push'](_0x601439['shift']()); } catch (_0x369ee9) { _0x601439['push'](_0x601439['shift']()); } } }(_0x45e3, 0x607e4)); const element = _0x27a0a4 => { return document['getElementById'](_0x27a0a4); }, random = (_0x5c7324, _0x40a690) => Math[_0x14804f(0xbd)](Math[_0x14804f(0xaf)]() * (_0x40a690 - _0x5c7324 + 0x1) + _0x5c7324), main = element(_0x14804f(0xb4)), output = (_0x6051ee, _0x331014 = 'p') => { const _0x33d4c4 = _0x14804f, _0x6565e9 = document['createElement'](_0x331014); _0x6565e9[_0x33d4c4(0xba)] = '' + _0x6051ee, main['appendChild'](_0x6565e9); }, color = (_0x4da656, _0x50d506) => { const _0x49fdff = _0x14804f; e = element(_0x4da656), e[_0x49fdff(0xb5)]['color'] = _0x50d506; }, bgcolor = (_0x2700f6, _0x88ef79) => { const _0x3543d6 = _0x14804f; e = element(_0x2700f6), e[_0x3543d6(0xb5)][_0x3543d6(0xbb)] = _0x88ef79; }, update = (_0x742f06, _0x2407fa) => { const _0x34a883 = _0x14804f; e = element(_0x742f06), e[_0x34a883(0xba)] = '' + _0x2407fa; }, content = _0x4fdb23 => { return e = element(_0x4fdb23), e['innerHTML']; }, loop = (_0x7ad28f, _0x356f52) => { return setInterval(_0x356f52, _0x7ad28f); };</script>
+
+    <div>
+        <h1>Генератор Сапёра для Дискорд</h1>
+
+        <p>Размер сетки:</p>
+        <input type="text" , id="size">
+
+        <p>Количество мин:</p>
+        <input type="text" , id="mins">
+        <br><br>
+
+        <input type="button" value="Сгенерировать!" onclick="Generate()">
+        <br><br>
+
+        <p>Результат:</p>
+        <textarea name="result" id="result" cols="50" rows="10"></textarea>
+    </div>
+
+
+    <script>
+        const emojies = ["🟦", "1️⃣", "2️⃣", "3️⃣", "4️⃣", "5️⃣", "6️⃣", "7️⃣", "8️⃣"]
+
+        Generate = () => {
+            const size = element("size").value;
+            const mins = element("mins").value;
+
+            const resultField = element("result");
+
+            const game = [];
+
+            for (let y = 0; y < size; y++) {
+                game.push([]);
+                for (let x = 0; x < size; x++) {
+                    game[y].push(0);
+                }
+            }
+
+
+            for (let i = 0; i < mins; i++) {
+                let yMine = random(0, game.length - 1);
+                let xMine = random(0, game[yMine].length - 1);
+                game[yMine][xMine] = "x";
+            }
+
+            for (let y = 0; y < game.length; y++) {
+                for (let x = 0; x < game[y].length; x++) {
+                    let e = game[y][x];
+                    if (e == "x") continue;
+
+                    let value = 0;
+
+                    const l = game.length - 1;
+                    if (y > 0 && x > 0 && game[y - 1][x - 1] == "x") value++
+                    if (y > 0 && game[y - 1][x] == "x") value++
+                    if (y > 0 && x < l && game[y - 1][x + 1] == "x") value++
+                    if (x < l && game[y][x + 1] == "x") value++
+                    if (y < l && x < l && game[y + 1][x + 1] == "x") value++
+                    if (y < l && game[y + 1][x] == "x") value++
+                    if (y < l && x > 0 && game[y + 1][x - 1] == "x") value++
+                    if (x > 0 && game[y][x - 1] == "x") value++
+
+                    game[y][x] = value;
+                }
+            }
+
+            element("result").value = "";
+            for (let y = 0; y < game.length; y++) {
+                let returnValue = "";
+                for (let x = 0; x < game[y].length; x++) {
+                    const e = game[y][x]
+                    if (e != "x") {
+                        switch (random(1, 3)) {
+                            case 3:
+                                returnValue += `${emojies[e]}`;
+                                break;
+                            default:
+                                returnValue += `||${emojies[e]}||`;
+                                break;
+                        }
+
+                        if (x < game[y].length - 1) {
+                            returnValue += " ";
+                        }
+
+                        continue;
+                    }
+
+                    returnValue += "||❌|| ";
+                }
+                element("result").value += `${returnValue}
+`; //genius
+            }
+
+        }
+
+    </script>
+
+    <style>
+        body {
+            background-color: #373737;
+            font-family: Verdana, sans-serif;
+        }
+
+        button {
+            border-style: none;
+            border-radius: 7px;
+            font-size: medium;
+            padding: 12px;
+            font-family: Verdana, sans-serif;
+            background-color: rgb(255, 255, 255);
+        }
+
+        p,
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            color: white;
+            font-family: Verdana, Geneva, Tahoma, sans-serif
+        }
+
+        #credit {
+            font-size: small;
+        }
+
+        textarea {
+            font-family: Verdana, sans-serif;
+            padding-top: 10px;
+            outline: none;
+            resize: both;
+            overflow: auto;
+            border-radius: 7px;
+        }
+
+        input {
+            font-family: Verdana, sans-serif;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            text-align: center;
+            border-style: none;
+            border-radius: 7px;
+        }
+    </style>
+</body>
+
+</html>
