@@ -15,10 +15,14 @@
         <h1>Генератор Сапёра для Дискорд</h1>
 
         <p>Размер сетки:</p>
-        <input type="text" , id="size">
+        <input type="text" id="size" value="5">
 
         <p>Количество мин:</p>
-        <input type="text" , id="mins">
+        <input type="text" id="mins" value="10">
+        <br><br>
+
+        <p>Шанс Видимости (%):</p>
+        <input type="text" id="chanсe" value="30">
         <br><br>
 
         <input type="button" value="Сгенерировать!" onclick="Generate()">
@@ -51,6 +55,12 @@
             for (let i = 0; i < mins; i++) {
                 let yMine = random(0, game.length - 1);
                 let xMine = random(0, game[yMine].length - 1);
+
+                if (game[yMine][xMine] == "x") {
+                    i--;
+                    continue;
+                }
+
                 game[yMine][xMine] = "x";
             }
 
@@ -79,10 +89,13 @@
             for (let y = 0; y < game.length; y++) {
                 let returnValue = "";
                 for (let x = 0; x < game[y].length; x++) {
+                    const chanсe = 1 / element("chanсe").value * 100;
+
                     const e = game[y][x]
                     if (e != "x") {
-                        switch (random(1, 3)) {
-                            case 3:
+
+                        switch (random(1, chanсe)) {
+                            case 1:
                                 returnValue += `${emojies[e]}`;
                                 break;
                             default:
